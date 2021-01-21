@@ -1,25 +1,24 @@
 .container {
   font-family: sans-serif;
   box-sizing: border-box;
-  width: 44%;
+  width: 35%;
   margin: auto;
 }
 
 .row {
   display: flex;
-  justify-content: center;
 }
 
 .column-one-third {
-  flex-basis: 25%;
+  flex-basis: calc(100% / 3);
 }
 
 .column-two-thirds {
-  flex-basis: 50%;
+  flex-basis: calc(100% * 2 / 3);
 }
 
 .column-one-fourth {
-  flex-basis: 20%;
+  flex-basis: 25%;
 }
 
 img {
@@ -27,13 +26,13 @@ img {
 }
 
 h1 {
-  font-size: 175%;
+  font-size: 1.7em;
 }
 
 h2 {
-  font-size: 125%;
+  font-size: 1.3em;
 }
 
 p {
-  font-size: 80%;
+  font-size: 0.84em;
 }
