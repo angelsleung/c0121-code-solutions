@@ -1,0 +1,38 @@
+.container {
+  font-family: sans-serif;
+  box-sizing: border-box;
+  width: 35%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.column-one-third {
+  flex-basis: calc(100% / 3);
+}
+
+.column-two-thirds {
+  flex-basis: calc(100% * 2 / 3);
+}
+
+.column-one-fourth {
+  flex-basis: 25%;
+}
+
+img {
+  width: 100%;
+}
+
+h1 {
+  font-size: 1.7em;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+p {
+  font-size: 0.84em;
+}
