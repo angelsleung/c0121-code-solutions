@@ -8,34 +8,30 @@
   width: 150px;
 
   /* your code here */
+  position: relative;
 }
 
 #bulbasaur {
   /* your code here */
-  position: relative;
   top: 20px;
 }
 
 #charmander {
   /* your code here */
-  position: relative;
   top: 40px;
 }
 
 #squirtle {
   /* your code here */
-  position: relative;
   top: 80px;
 }
 
 #pikachu {
   /* your code here */
-  position: relative;
   top: 160px;
 }
 
 #jigglypuff {
   /* your code here */
-  position: relative;
   top: 300px;
 }

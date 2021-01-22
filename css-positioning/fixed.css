@@ -8,5 +8,5 @@ html {
 
   /* your code here */
   position: fixed;
-  left: 200px;
+  width: 100%;
 }
