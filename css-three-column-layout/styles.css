@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Lato, sans-serif;
+  background-color: #1996d9;
+  color: white;
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+  padding: 50px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.column-one-third {
+  flex-basis: 25%;
+}
+
+.icon-circle {
+  border-radius: 50%;
+  background-color: white;
+  width: 150px;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+.icon {
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  font-weight: normal;
+  padding: 10px;
+  font-size: 2em;
+}
+
+.name {
+  text-align: center;
+  font-weight: normal;
+}
+
+.description {
+  text-align: center;
+  font-size: 1.1em;
+}
