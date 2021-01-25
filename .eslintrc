@@ -24,6 +24,7 @@
       "error",
       "multi-line"
     ],
+    "no-var": "off",
     "no-console": [
       "error",
       {
