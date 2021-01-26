@@ -6,14 +6,16 @@ var orderHistory = [
     shipTo: 'JS Masher',
     orderNumber: 11439416898772232,
     items:
-    {
-      deliveryDate: 20200808,
-      deliveryMethod: null,
-      name: 'JavaScript for impatient programmers',
-      author: 'Ruschmayer, Dr. Axel',
-      returnCloseDate: 20200907,
-      price: 31.55
-    }
+    [
+      {
+        deliveryDate: 20200808,
+        deliveryMethod: null,
+        name: 'JavaScript for impatient programmers',
+        author: 'Ruschmayer, Dr. Axel',
+        returnCloseDate: 20200907,
+        price: 31.55
+      }
+    ]
   },
 
   {
@@ -22,14 +24,16 @@ var orderHistory = [
     shipTo: 'JS Masher',
     orderNumber: 11399842681280257,
     items:
-    {
-      deliveryDate: 20200720,
-      deliveryMethod: 'resident',
-      name: 'The Timeless Way of Building',
-      author: 'Alexander, Christopher',
-      returnCloseDate: 20200819,
-      price: 41.33
-    }
+    [
+      {
+        deliveryDate: 20200720,
+        deliveryMethod: 'resident',
+        name: 'The Timeless Way of Building',
+        author: 'Alexander, Christopher',
+        returnCloseDate: 20200819,
+        price: 41.33
+      }
+    ]
   },
 
   {
@@ -38,14 +42,16 @@ var orderHistory = [
     shipTo: 'JS Masher',
     orderNumber: 11428755579059409,
     items:
-    {
-      deliveryDate: 20200707,
-      deliveryMethod: 'resident',
-      name: 'Gamecube Controller Adapter. Super Smash Bros Switch Gamecube Adapter for WII U, PC. Support Turbo and Vibration Features. No Driver and No Lag-Gamecube Adapter',
-      author: null,
-      returnCloseDate: 20200805,
-      price: 15.98
-    }
+    [
+      {
+        deliveryDate: 20200707,
+        deliveryMethod: 'resident',
+        name: 'Gamecube Controller Adapter. Super Smash Bros Switch Gamecube Adapter for WII U, PC. Support Turbo and Vibration Features. No Driver and No Lag-Gamecube Adapter',
+        author: null,
+        returnCloseDate: 20200805,
+        price: 15.98
+      }
+    ]
   },
 
   {
