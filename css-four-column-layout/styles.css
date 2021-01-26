@@ -1,0 +1,36 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #f7f8fa;
+  padding: 0.1rem 5rem;
+}
+
+.heading {
+  font-size: 2em;
+}
+
+.features {
+  display: flex;
+  width: 100%;
+}
+
+.feature {
+  padding: 2rem;
+}
+
+.screen {
+  width: 100%;
+}
+
+.icon {
+  width: 20%;
+}
