@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Karla, sans-serif;
+}
+
+.container {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  line-height: 1.5;
+}
+
+.section {
+  display: flex;
+}
+
+.name-and-description {
+  flex-basis: 60%;
+  margin-top: 30px;
+}
+
+.icon {
+  flex-basis: 25%;
+  align-self: flex-start;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-size: 2.8em;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.subheading {
+  width: 70%;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.name {
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.learn-more {
+  color: #dd888d;
+  font-size: 1.2em;
+  font-weight: bold;
+  border: 2px solid #dd888d;
+  padding: 8px 50px;
+  text-transform: uppercase;
+  margin-top: 50px;
+}
