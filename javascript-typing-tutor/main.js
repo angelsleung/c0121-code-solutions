@@ -6,10 +6,7 @@ var nextKey = $allKeys[index];
 var missedCount = 0;
 
 function pressKey(event) {
-  var isNbspKey = false; // Must check because &nbsp; !== ' '
-  if (nextKey.textContent.charCodeAt(0) === 160) {
-    isNbspKey = true;
-  }
+  var isNbspKey = nextKey.textContent.charCodeAt(0) === 160; // Must check because &nbsp; !== ' '
   if ((event.key === nextKey.textContent) || (event.key === ' ' && isNbspKey)) {
     nextKey.className = 'typed';
     index++;
