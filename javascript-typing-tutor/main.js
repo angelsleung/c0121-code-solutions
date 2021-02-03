@@ -17,6 +17,7 @@ function pressKey(event) {
       nextKey = $allKeys[index];
       nextKey.className = 'underlined-key';
     } else {
+      nextKey.className = 'typed';
       var correctCount = $allKeys.length - missedCount;
       var correctPercent = Math.floor(correctCount * 100 / $allKeys.length);
       $accuracy.textContent = 'Accuracy: ' + correctCount + '/' + $allKeys.length + ' = ' + correctPercent + '%';
