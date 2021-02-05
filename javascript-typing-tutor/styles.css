@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.type-phrase {
+  margin: 0 auto;
+}
+
+.underlined-key {
+  border-bottom: 4px solid black;
+}
+
+.typed {
+  color: lime;
+}
+
+.incorrect {
+  color: red;
+  border-bottom: 4px solid red;
+}
+
+.accuracy {
+  padding: 5rem;
+  visibility: visible;
+}
+
+.play-again {
+  margin: 5rem auto;
+  visibility: visible;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+.hidden {
+  visibility: hidden;
+}
