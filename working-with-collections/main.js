@@ -26,25 +26,28 @@ function createPlayers(numPlayers) {
 }
 
 function shuffle(totalCards) {
+  var cardIndexes = [];
   while (cardIndexes.length <= totalCards) {
     var cardIndex = Math.floor(Math.random() * 52);
     if (!cardIndexes.includes(cardIndex)) {
       cardIndexes.push(cardIndex);
     }
   }
+  return cardIndexes;
 }
 
-function deal(totalCards, startIndex) {
-  for (var i = startIndex; i < totalCards; i++) {
+function deal(players, totalCards, cardIndexes) {
+  for (var i = 0; i < totalCards; i++) {
     var card = cards[cardIndexes[i]];
     players[i % players.length].hand.push(card);
   }
+  return players;
 }
 
-function score() {
+function score(players) {
+  var winners = [];
   for (var i = 0; i < players.length; i++) {
     var score = 0;
-    var name = players[i].name;
     var hand = players[i].hand;
     for (var j = 0; j < hand.length; j++) {
       var card = hand[j];
@@ -56,6 +59,8 @@ function score() {
         score += card.rank;
       }
     }
+    var highScore = 0;
+    var name = players[i].name;
     if (score > highScore) {
       winners = [name];
       highScore = score;
@@ -63,43 +68,42 @@ function score() {
       winners.push(name);
     }
   }
+  return winners;
 }
 
 function playGame(players, numCardsPerHand) {
   var totalCards = players.length * numCardsPerHand;
-  shuffle(totalCards);
-  deal(totalCards, 0);
-  score();
+  var cardIndexes = shuffle(totalCards);
+  players = deal(players, totalCards, cardIndexes);
+  var winners = score(players);
   if (winners.length > 1) {
-    handleTie(totalCards);
+    playGame(winners.length, 1);
   }
+  console.log('winners:', winners);
   var winnerName = winners[0];
   console.log('The winner is', winnerName + '!');
   console.log('Players:', players);
 }
 
-function handleTie(totalCards) {
-  while (winners.length > 1) {
-    console.log('Tie - deal another card as tie-breaker');
-    var tiePlayers = [];
-    for (var i = 0; i < players.length; i++) {
-      if (winners.includes(players[i].name)) {
-        tiePlayers.push(players[i]);
-      }
-    }
-    players = tiePlayers;
-    var dealStartIndex = totalCards;
-    totalCards += winners.length;
-    shuffle(totalCards);
-    deal(totalCards, dealStartIndex);
-    winners = [];
-    score();
-  }
-}
+// function handleTie(totalCards) {
+//   while (winners.length > 1) {
+//     console.log('Tie - deal another card as tie-breaker');
+//     var tiePlayers = [];
+//     for (var i = 0; i < players.length; i++) {
+//       if (winners.includes(players[i].name)) {
+//         tiePlayers.push(players[i]);
+//       }
+//     }
+//     players = tiePlayers;
+//     var dealStartIndex = totalCards;
+//     totalCards += winners.length;
+//     shuffle(totalCards);
+//     deal(totalCards, dealStartIndex);
+//     winners = [];
+//     score();
+//   }
+// }
 
-var cardIndexes = [];
-var winners = [];
-var highScore = 0;
 var cards = createCards();
 var players = createPlayers(4);
 playGame(players, 2);
