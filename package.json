@@ -49,6 +49,7 @@
     "stylelint-config-standard": "^20.0.0"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "jquery": "^3.6.0"
   },
   "scripts": {
