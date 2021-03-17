@@ -37,13 +37,14 @@ app.post('/api/notes', (req, res) => {
   }
   notes[nextId] = req.body;
   notes[nextId].id = nextId;
-  fs.writeFile('data.json', JSON.stringify(notes, null, 2), err => {
+  nextId++;
+  fs.writeFile('derp/data.json', JSON.stringify(data, null, 2), err => {
     if (err) {
+      console.error(err);
       res.status(500).json({ error: 'An unexpected error occurred.' });
-      throw err;
+    } else {
+      res.status(201).json(notes[nextId]);
     }
-    res.status(201).json(notes[nextId]);
-    nextId++;
   });
 });
 
@@ -57,13 +58,14 @@ app.delete('/api/notes/:id', (req, res) => {
     res.status(404).json({ error: 'Cannot find note with id ' + id });
     return;
   }
-  fs.writeFile('data.json', JSON.stringify(notes, null, 2), err => {
+  fs.writeFile('data.json', JSON.stringify(data, null, 2), err => {
     if (err) {
+      console.error(err);
       res.status(500).json({ error: 'An unexpected error occurred.' });
-      throw err;
+    } else {
+      delete notes[id];
+      res.status(204).json();
     }
-    delete notes[id];
-    res.status(204).json();
   });
 });
 
@@ -81,14 +83,15 @@ app.put('/api/notes/:id', (req, res) => {
     res.status(404).json({ error: 'Cannot find note with id ' + id });
     return;
   }
-  fs.writeFile('data.json', JSON.stringify(notes, null, 2), err => {
+  fs.writeFile('data.json', JSON.stringify(data, null, 2), err => {
     if (err) {
+      console.error(err);
       res.status(500).json({ error: 'An unexpected error occurred.' });
-      throw err;
+    } else {
+      notes[id] = req.body;
+      notes[id].id = id;
+      res.status(200).json(notes[id]);
     }
-    notes[id] = req.body;
-    notes[id].id = id;
-    res.status(200).json(notes[id]);
   });
 });
 
