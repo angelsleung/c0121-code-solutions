@@ -52,7 +52,7 @@ app.post('/api/grades', (req, res) => {
   const values = [name, course, score];
   db.query(sql, values)
     .then(result => {
-      res.status(200).json(result.rows[0]);
+      res.status(201).json(result.rows[0]);
     })
     .catch(err => {
       console.error(err);
@@ -134,9 +134,7 @@ app.delete('/api/grades/:gradeId', (req, res) => {
           error: `Unable to find grade with 'gradeId' ${gradeId}`
         });
       } else {
-        res.status(200).json({
-          deleted: grade
-        });
+        res.sendStatus(204);
       }
     })
     .catch(err => {
