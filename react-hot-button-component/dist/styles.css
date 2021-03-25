@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.button {
+  padding: 1rem;
+  border: 3px solid;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.gray {
+  background-color: lightgray;
+}
+
+.blue {
+  background-color: #351d73;
+  color: white;
+}
+
+.purple {
+  background-color: #674fa7;
+  color: white;
+}
+
+.red {
+  background-color: #df6665;
+  color: white;
+}
+
+.orange {
+  background-color: #f4b367;
+}
+
+.yellow {
+  background-color: #ffff01;
+}
+
+.white {
+  background-color: white;
+}
