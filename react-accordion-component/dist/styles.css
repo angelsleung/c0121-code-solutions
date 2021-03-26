@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  display: flex;
+}
+
+.topic {
+  border: 2px solid;
+  background-color: lightgray;
+  padding: 1rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.content {
+  border: 2px solid;
+  padding: 1rem;
+}
+
+.hidden {
+  display: none;
+}
