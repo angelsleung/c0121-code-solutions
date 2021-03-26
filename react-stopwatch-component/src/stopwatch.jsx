@@ -33,10 +33,12 @@ class Stopwatch extends React.Component {
 
   render() {
     const icon = this.state.isTicking ? 'pause' : 'play';
-    const clickableClock = !this.state.isTicking && this.state.seconds > 0 ? 'click' : 'noClick';
+    const clockClass = this.state.isTicking || this.state.seconds === 0
+      ? ''
+      : 'click';
     return (
       <div className='stopwatch'>
-        <div onClick={this.handleClickClock} className={`clock ${clickableClock}`}>
+        <div onClick={this.handleClickClock} className={`clock ${clockClass}`}>
           <div className='time'>{this.state.seconds}</div>
         </div>
         <i onClick={this.handleClickIcon} className={`icon fas fa-${icon}`}></i>
