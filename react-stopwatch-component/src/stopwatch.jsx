@@ -3,36 +3,43 @@ import React from 'react';
 class Stopwatch extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isTicking: false };
-    this.seconds = 0;
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      isTicking: false,
+      seconds: 0
+    };
+    this.handleClickIcon = this.handleClickIcon.bind(this);
+    this.handleClickClock = this.handleClickClock.bind(this);
   }
 
-  handleClick() {
-    this.setState({ isTicking: !this.state.isTicking });
+  handleClickIcon() {
     if (this.state.isTicking) {
-      this.timerID = setInterval(() => this.tick(), 1000);
+      clearInterval(this.timerID);
     } else {
-      this.reset();
+      this.timerID = setInterval(() => this.tick(), 1000);
+    }
+    this.setState({ isTicking: !this.state.isTicking });
+  }
+
+  handleClickClock() {
+    if (!this.state.isTicking) {
+      clearInterval(this.timerID);
+      this.setState({ seconds: 0 });
     }
   }
 
   tick() {
-    this.seconds++;
-  }
-
-  reset() {
-    clearInterval(this.timerID);
-    // this.seconds = 0;
+    this.setState({ seconds: this.state.seconds + 1 });
   }
 
   render() {
+    const icon = this.state.isTicking ? 'pause' : 'play';
+    const clickableClock = !this.state.isTicking && this.state.seconds > 0 ? 'click' : 'noClick';
     return (
       <div className='stopwatch'>
-        <div className='clock'>
-          <div className='time'>{this.seconds}</div>
+        <div onClick={this.handleClickClock} className={`clock ${clickableClock}`}>
+          <div className='time'>{this.state.seconds}</div>
         </div>
-        <i onClick={this.handleClick} className='icon fas fa-play'></i>
+        <i onClick={this.handleClickIcon} className={`icon fas fa-${icon}`}></i>
       </div>
     );
   }

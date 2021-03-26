@@ -26,6 +26,10 @@ body {
   width: 20rem;
 }
 
+.clock.click {
+  cursor: pointer;
+}
+
 .time {
   font-family: sans-serif;
   font-weight: bold;
