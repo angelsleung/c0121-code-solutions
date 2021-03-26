@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.app-drawer {
+  display: flex;
+}
+
+.icon {
+  padding: 2rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.menu {
+  position: absolute;
+  border: solid;
+  width: 20%;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: white;
+  z-index: 1;
+}
+
+.shade {
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+  display: none;
+}
