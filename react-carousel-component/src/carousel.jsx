@@ -5,29 +5,44 @@ class Carousel extends React.Component {
     super(props);
     this.state = { displayIndex: 0 };
     this.stepRight = this.stepRight.bind(this);
-    this.stepLeft = this.stepLeft.bind(this);
+    this.clickRight = this.clickRight.bind(this);
+    this.clickLeft = this.clickLeft.bind(this);
     this.clickDot = this.clickDot.bind(this);
   }
 
-  stepRight() {
-    if (this.state.displayIndex === this.props.images.length - 1) {
-      this.setState({ displayIndex: 0 });
-    } else {
-      this.setState({ displayIndex: this.state.displayIndex + 1 });
-    }
+  componentDidMount() {
+    this.timerID = setInterval(this.stepRight, 3000);
   }
 
-  stepLeft() {
-    if (this.state.displayIndex === 0) {
-      this.setState({ displayIndex: this.props.images.length - 1 });
-    } else {
-      this.setState({ displayIndex: this.state.displayIndex - 1 });
-    }
+  stepRight() {
+    const nextIndex = this.state.displayIndex === this.props.images.length - 1
+      ? 0
+      : this.state.displayIndex + 1;
+    this.setState({ displayIndex: nextIndex });
+  }
+
+  clickRight() {
+    this.stepRight();
+    this.resetAutoStep();
+  }
+
+  clickLeft() {
+    const nextIndex = this.state.displayIndex === 0
+      ? this.props.images.length - 1
+      : this.state.displayIndex - 1;
+    this.setState({ displayIndex: nextIndex });
+    this.resetAutoStep();
   }
 
   clickDot(event) {
     const index = event.target.getAttribute('index');
     this.setState({ displayIndex: parseInt(index, 10) });
+    this.resetAutoStep();
+  }
+
+  resetAutoStep() {
+    clearInterval(this.timerID);
+    this.timerID = setInterval(this.stepRight, 3000);
   }
 
   renderDots() {
@@ -45,7 +60,7 @@ class Carousel extends React.Component {
     const pokemonNumber = imageURL.slice(10, 13);
     return (
     <div className='carousel'>
-      <i className="arrow fas fa-chevron-left" onClick={this.stepLeft}></i>
+      <i className="arrow fas fa-chevron-left" onClick={this.clickLeft}></i>
       <div className='image-dots'>
         <img className='image' src={imageURL}
           alt={`Pokemon #${pokemonNumber}`}></img>
@@ -53,7 +68,7 @@ class Carousel extends React.Component {
           {this.renderDots()}
         </div>
       </div>
-      <i className="arrow fas fa-chevron-right" onClick={this.stepRight}></i>
+      <i className="arrow fas fa-chevron-right" onClick={this.clickRight}></i>
     </div>
     );
   }
