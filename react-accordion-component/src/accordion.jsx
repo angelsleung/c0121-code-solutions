@@ -3,30 +3,31 @@ import React from 'react';
 class Accordion extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false };
+    this.state = { openTopic: null };
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.setState({ isOpen: !this.state.isOpen });
-  }
-
-  Topic(prop) {
-    const contentClass = this.state.isOpen ? '' : 'hidden';
-    return (
-      <>
-        <div className='topic' onClick={this.handleClick}>{prop.topic}</div>
-        <div className={`content ${contentClass}`}>{prop.content}</div>
-      </>
-    );
+  handleClick(event) {
+    const clickedTopic = event.target.getAttribute('topic');
+    if (clickedTopic === this.state.openTopic) {
+      this.setState({ openTopic: null });
+    } else {
+      this.setState({ openTopic: clickedTopic });
+    }
   }
 
   render() {
-    return (
-      this.props.map(prop => {
-        <Topic key={this.props.key}/>
-      }
-    );
+    const topics = this.props.data.map(topic => {
+      const contentClass = topic.title === this.state.openTopic ? '' : 'hidden';
+      return (
+        <div key={topic.title} className='topic'>
+          <div className='title' topic={topic.title} onClick={this.handleClick}>{topic.title}</div>
+          <div className={`content ${contentClass}`}>{topic.content}</div>
+        </div>
+      );
+    });
+    return topics;
   }
 }
+
 export default Accordion;
