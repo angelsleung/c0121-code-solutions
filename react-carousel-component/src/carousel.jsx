@@ -6,6 +6,7 @@ class Carousel extends React.Component {
     this.state = { displayIndex: 0 };
     this.stepRight = this.stepRight.bind(this);
     this.stepLeft = this.stepLeft.bind(this);
+    this.clickDot = this.clickDot.bind(this);
   }
 
   stepRight() {
@@ -24,18 +25,32 @@ class Carousel extends React.Component {
     }
   }
 
+  clickDot(event) {
+    const index = event.target.getAttribute('index');
+    this.setState({ displayIndex: parseInt(index, 10) });
+  }
+
+  renderDots() {
+    return (
+      this.props.images.map((value, index) => {
+        const dotClass = index === this.state.displayIndex ? 's' : 'r';
+        return <i key={index} className={`dot fa${dotClass} fa-circle`}
+          onClick={this.clickDot} index={index}></i>;
+      })
+    );
+  }
+
   render() {
+    const imageURL = this.props.images[this.state.displayIndex];
+    const pokemonNumber = imageURL.slice(10, 13);
     return (
     <div className='carousel'>
       <i className="arrow fas fa-chevron-left" onClick={this.stepLeft}></i>
       <div className='image-dots'>
-        <img className='image' src={this.props.images[this.state.displayIndex]} alt='pikachu'></img>
+        <img className='image' src={imageURL}
+          alt={`Pokemon #${pokemonNumber}`}></img>
         <div className='dots'>
-          <i className="dot fas fa-circle"></i>
-          <i className="dot far fa-circle"></i>
-          <i className="dot far fa-circle"></i>
-          <i className="dot far fa-circle"></i>
-          <i className="dot far fa-circle"></i>
+          {this.renderDots()}
         </div>
       </div>
       <i className="arrow fas fa-chevron-right" onClick={this.stepRight}></i>
