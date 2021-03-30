@@ -40,15 +40,16 @@ export default class App extends React.Component {
     * TIP: Be sure to SERIALIZE the todo object in the body with JSON.stringify()
     * and specify the "Content-Type" header as "application/json"
     */
-    fetch('api/todos', {
+    const req = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTodo)
-    })
+    };
+    fetch('api/todos', req)
       .then(res => res.json())
       .then(todo => {
-        this.state.todos.push(todo);
-        this.getAllTodos();
+        const todos = this.state.todos.concat(todo);
+        this.setState({ todos });
       })
       .catch(err => {
         console.error(err);
@@ -76,18 +77,21 @@ export default class App extends React.Component {
       if (this.state.todos[i].todoId === todoId) {
         selected = this.state.todos[i];
         index = i;
+        break;
       }
     }
     const toggled = { isCompleted: !selected.isCompleted };
-    fetch(`/api/todos/${todoId}`, {
+    const req = {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(toggled)
-    })
+    };
+    fetch(`/api/todos/${todoId}`, req)
       .then(res => res.json())
       .then(todo => {
-        this.state.todos.splice(index, 1, toggled);
-        this.getAllTodos();
+        const todos = this.state.todos.slice();
+        todos[index] = todo;
+        this.setState({ todos });
       })
       .catch(err => {
         console.error(err);
