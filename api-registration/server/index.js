@@ -2,6 +2,7 @@ require('dotenv/config');
 const pg = require('pg');
 const argon2 = require('argon2'); // eslint-disable-line
 const express = require('express');
+const jwt = require('jsonwebtoken'); // eslint-disable-line
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 
@@ -23,20 +24,6 @@ app.post('/api/auth/sign-up', (req, res, next) => {
   if (!username || !password) {
     throw new ClientError(400, 'username and password are required fields');
   }
-
-  /* your code starts here */
-
-  /**
-   * Hash the user's password with `argon2.hash()`
-   * Then, 😉
-   *   Insert the user's "username" and "hashedPassword" into the "users" table.
-   *   Then, 😉
-   *     Respond to the client with a 201 status code and the new user's "userId", "username", and "createdAt" timestamp.
-   *   Catch any errors.
-   * Catch any errors.
-   *
-   * Hint: Insert statements can include a `returning` clause to retrieve the insterted row(s).
-   */
   argon2
     .hash(password)
     .then(hashedPassword => {
@@ -46,10 +33,67 @@ app.post('/api/auth/sign-up', (req, res, next) => {
         returning "userId", "username", "createdAt"
       `;
       const params = [username, hashedPassword];
-      db.query(sql, params)
-        .then(result => {
-          const [login] = result.rows;
-          res.status(201).json(login);
+      return db.query(sql, params);
+    })
+    .then(result => {
+      const [user] = result.rows;
+      res.status(201).json(user);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(401, 'invalid login');
+  }
+
+  /* your code starts here */
+
+  /**
+   * Query the database to find the "userId" and "hashedPassword" for the "username".
+   * Then, 😉
+   *    If no user is found,
+   *      throw a 401: 'invalid login' error.
+   *    If a user is found,
+   *      confirm that the password included in the request body matches the "hashedPassword" with `argon2.verify()`
+   *      Then, 😉
+   *        If the password does not match,
+   *          throw a 401: 'invalid login' error.
+   *        If the password does match,
+   *          Create a payload object containing the user's "userId" and "username".
+   *          Create a new signed token with `jwt.sign()`, using the payload and your TOKEN_SECRET
+   *          Send the client a 200 response containing the payload and the token.
+   *      Catch any error.
+   * Catch any error.
+   */
+  const sql = `
+    select *
+      from "users"
+     where "username" = $1
+  `;
+  const params = [username];
+  db.query(sql, params)
+    .then(result => {
+      const [login] = result.rows;
+      if (!login) {
+        throw new ClientError(401, 'invalid login');
+      }
+      argon2
+        .verify(login.hashedPassword, password)
+        .then(isMatching => {
+          if (!isMatching) {
+            throw new ClientError(401, 'invalid login');
+          }
+          const payload = {
+            userId: login.userId,
+            username: login.username
+          };
+          const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+          res.status(200).json({
+            token,
+            user: payload
+          });
         })
         .catch(err => next(err));
     })
@@ -58,7 +102,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
 
 app.use(errorMiddleware);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
-  console.log('express server listening on port 3000');
+  console.log(`express server listening on port ${process.env.PORT}`);
 });
