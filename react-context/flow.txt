@@ -1,0 +1,26 @@
+1) User can sign up:
+- User clicks the "Register now" link which triggers the hashchange event and updates the route property of the state, which changes the text on the page to reflect the Sign-up page.
+- User inputs a username and password and clicks Register
+- When the submit event is triggered, the client sends a POST fetch request to the server
+- Server checks to see if username and password are filled in, hashes the password, then sends a SQL query to the database to create a new login
+- The server returns a status code indicating the success/failure of the request, along with the newly created login in the case of success
+
+2) User can sign in:
+- User inputs username and password and clicks Log In
+- When the submit event is triggered, the client sends a POST fetch request to the server
+- Server checks to see if username and password are filled in, then sends a SQL query to the database
+- If the username exists in the database, the server hashes the provided password and compares it with the hashed password from the database
+- If the hashed passwords match, the server generates a JSON web token with the login information and sends it to the client
+- If a token is provided, the user is able to log in successfully
+- This triggers a hashchange event that updates the user property of the state, and this leads to a re-render of the page
+- The user is navigated to Home page and is able to see the Rick Roll gif
+
+3) User can stay signed in (even if they refresh the page):
+- When the app loads, the browser checks local storage to see if there is a token saved under 'react-context-jwt'
+- If there is a token, the browser decodes the token to get the payload and updates the user property of the state to be the user, so they do not have to log in again
+- Otherwise, the user is navigated to the Auth sign-up page
+
+4) User can sign out:
+- When the user clicks the Sign Out button, the token is removed from local storage
+- A hashchange event is triggered and the user property of the state is cleared
+- This leads to a re-render of the page, and the user sees the Auth sign-up page again
