@@ -1,7 +1,5 @@
 function graduate(credential) {
-  return function (fullName) {
-    return `${fullName}, ${credential}`;
-  };
+  return fullName => `${fullName}, ${credential}`;
 }
 
 const medicalSchool = graduate('M.D.');
